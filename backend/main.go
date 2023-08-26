@@ -13,8 +13,22 @@ func main() {
 
 	r.Use(CORSMiddleware())
 
+	//GET Ticket
 	r.GET("/ListTickets",controller.ListTicket)
-	r.GET("/ListTicketpending",controller.ListTicketPending)
+	r.GET("/GetTicket/:id",controller.GetTicket)
+	r.GET("/ListTicketPending",controller.ListTicketPending)
+	r.GET("/ListTicketAccepted",controller.ListTicketAccepted)
+	r.GET("/ListTicketResolved",controller.ListTicketResolved)
+	r.GET("/ListTicketRejected",controller.ListTicketRejected)
+
+	// PATCH Ticket
+	r.PATCH("/UpdateTicket/:id",controller.UpdateTicket)
+	r.PATCH("/UpdateStatusTicket/:id",controller.UpdateStatusTicket)
+
+
+	// POST Ticket
+	r.POST("/CreateTicket",controller.CreateTicket)
+
 
 	r.Run()
 
