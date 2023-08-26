@@ -8,6 +8,8 @@ import (
 	"github.com/gin-gonic/gin"
 
 	"time"
+
+	"github.com/asaskevich/govalidator"
 )
 
 // GET /All Ticket
@@ -140,11 +142,11 @@ func CreateTicket(c *gin.Context){
     	return
     }
 
-	// // แทรกการ validate ไว้ช่วงนี้ของ controller
-	// if _, err := govalidator.ValidateStruct(customer); err != nil {
-	// 	c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-	// 	return
-	// }
+	// แทรกการ validate ไว้ช่วงนี้ของ controller
+	if _, err := govalidator.ValidateStruct(ticket); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
 
 	// // เข้ารหัสลับรหัสผ่านที่ผู้ใช้กรอกก่อนบันทึกลงฐานข้อมูล
 	// hashPassword, err := bcrypt.GenerateFromPassword([]byte(customer.Password), 14)
