@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Col, Row, Card, Layout, Menu, Button, theme } from "antd";
 import { Key } from "@mui/icons-material";
 import Edit_ContentDrawer from "./Edit_ContentDrawer";
+
+import {Ticket} from "../interfaces/Ticketinterface"
+import { Console } from "console";
           
 
 
@@ -9,6 +12,231 @@ interface Props {
     setOpenDrawer: React.Dispatch<React.SetStateAction<string>>;
 }
 const Status_Content: React.FC<Props> = ({setOpenDrawer}) => {
+
+  const [TricketPending, setTricketPending] = React.useState<Ticket[]>([]);
+  const [TicketAll, setTricketAll] = React.useState<Ticket[]>([]);
+  
+  //TODO Connect Service API
+  const apiUrl = "http://localhost:8080";
+  //!! CustomerID ??????
+  // const customerID = parseInt(localStorage.getItem("uid") + "");
+  //!! Ticket ID หาวิธีใส่ตอนกด
+  const TicketID = 2;
+
+  //GET ListTicket All
+  const ListTicket = async () => {
+    const requestOptions = {
+      method: "GET",
+      headers: { "Content-Type": "application/json",
+      },
+    };
+  
+    try {
+      const response = await fetch(`${apiUrl}/ListTickets`, requestOptions);
+      const data = await response.json();
+  
+      if (data.data) {
+        setTricketAll(data.data);
+        console.log(data.data);
+        return data.data;
+      } else {
+        return false;
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      return false;
+    }
+  }
+
+  //GET Ticket/:id
+  const GetTicket = async () => {
+    const requestOptions = {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    };
+    let res = await fetch(`${apiUrl}/GetTicket/${TicketID}`, requestOptions)
+      .then((response) => response.json())
+      .then((res) => {
+        if (res.data) {
+          return res.data
+
+        } else {
+          return false
+        }
+      });
+      return res
+  };
+
+  //GET ListTicketPending All
+  const ListTicketPending = async () => {
+    const requestOptions = {
+      method: "GET",
+      headers: { "Content-Type": "application/json",
+      },
+    };
+    try {
+      const response = await fetch(`${apiUrl}/ListTicketPending`, requestOptions);
+      const data = await response.json();
+  
+      if (data.data) {
+        setTricketPending(data.data);
+        console.log(data.data);
+        return data.data;
+      } else {
+        return false;
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      return false;
+    }
+  };
+  
+  
+
+
+  //GET ListTicketAccepted All
+  const ListTicketAccepted = async () => {
+    const requestOptions = {
+      method: "GET",
+      headers: { "Content-Type": "application/json",
+      },
+    };
+  
+    let res = await fetch(`${apiUrl}/ListTicketAccepted`, requestOptions)
+      .then((response) => response.json())
+      .then((res) => {
+        if (res.data) {
+          return res.data;
+        } else {
+          return false;
+        }
+      });
+  
+    return res;
+  }
+
+  //GET ListTicketResolved All
+  const ListTicketResolved = async () => {
+    const requestOptions = {
+      method: "GET",
+      headers: { "Content-Type": "application/json",
+      },
+    };
+  
+    let res = await fetch(`${apiUrl}/ListTicketResolved`, requestOptions)
+      .then((response) => response.json())
+      .then((res) => {
+        if (res.data) {
+          return res.data;
+        } else {
+          return false;
+        }
+      });
+  
+    return res;
+  }
+
+  //GET ListTicketRejected All
+  const ListTicketRejected = async () => {
+    const requestOptions = {
+      method: "GET",
+      headers: { "Content-Type": "application/json",
+      },
+    };
+  
+    let res = await fetch(`${apiUrl}/ListTicketRejected`, requestOptions)
+      .then((response) => response.json())
+      .then((res) => {
+        if (res.data) {
+          return res.data;
+        } else {
+          return false;
+        }
+      });
+  
+    return res;
+  }
+
+  //PATCH  UpdateTicket/:id
+  const UpdateTicket = async () => {
+    // var pphonee = phone.split("-");
+    // var pphonee2 = pphonee[0] + pphonee[1] + pphonee[2];
+    let data = {
+      // ID: customerID,
+      // Name: NAMEa,
+      // CAREER_ID: convertType(Careera),
+      // Phone: pphonee2,
+    };
+
+    const requestOptions = {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    };
+    let res = await fetch(`${apiUrl}/UpdateTicket/${TicketID}`, requestOptions)
+    fetch(apiUrl, requestOptions)
+      .then((response) => response.json())
+      .then((res) => {
+        if (res.data) {
+          return res.data
+        } else {
+          return false
+        }
+      });
+      return res;
+  }
+
+  //PATCH  UpdateStatusTicket/:id
+  const UpdateStatusTicket = async () => {
+    // var pphonee = phone.split("-");
+    // var pphonee2 = pphonee[0] + pphonee[1] + pphonee[2];
+    let data = {
+      // ID: customerID,
+      // Name: NAMEa,
+      // CAREER_ID: convertType(Careera),
+      // Phone: pphonee2,
+    };
+
+    const requestOptions = {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    };
+    let res = await fetch(`${apiUrl}/UpdateStatusTicket/${TicketID}`, requestOptions)
+    fetch(apiUrl, requestOptions)
+      .then((response) => response.json())
+      .then((res) => {
+        if (res.data) {
+          return res.data
+        } else {
+          return false
+        }
+      });
+      return res;
+  }
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await ListTicketPending();
+      await ListTicket();
+    };
+    fetchData();
+  }, []);
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
 
     const handleFunctionCall = (setDrawer: string) =>{
         setOpenDrawer(setDrawer);
@@ -65,14 +293,14 @@ const Status_Content: React.FC<Props> = ({setOpenDrawer}) => {
       </Row>
 
       {/*//TODO Loop สร้าง Ticket */}
-      {dataMock.map((item, index) => (
+      {TricketPending.map((item, index) => (
         <Row>
-          {numOfcol.map((num, point) => (
+          {numOfcol.map((num = item, point) => (
             <Col span={6} id="col">
               <div style={{width: "94%"}} onClick={() =>handleFunctionCall('true')}>
 
               <Card
-                title={num.Title}
+                title={item.Title}
                 id="card"
                 bordered={false}
                 size={"small"}
@@ -84,9 +312,9 @@ const Status_Content: React.FC<Props> = ({setOpenDrawer}) => {
                     marginBottom: 14,
                   }}
                   >
-                <p>{item.Content1}</p>
+                {/* <p>{item.Content1}</p>
                 <p>{item.Content2}</p>
-                <p>{item.Content2}</p>
+                <p>{item.Content2}</p> */}
               </Card>
                   </div>
             </Col>
