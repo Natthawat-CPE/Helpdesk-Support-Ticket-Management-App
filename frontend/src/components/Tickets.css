@@ -1,0 +1,32 @@
+#all-page{
+    background-color: #fff;
+}
+
+#col{
+    width: 200px;
+    display: flex;
+    flex: auto;
+    margin: 0px 3px 0px 3px;
+    background-color: #f4f4f4;
+}
+
+#col-topic{
+    width: 200px;
+    display: flex;
+    flex: auto;
+    margin: 0px 3px 0px 3px;
+    background-color: #f4f4f4;
+}
+
+
+#card:hover{
+    /* background-color: aqua; */
+    cursor: pointer;
+    box-shadow: 8px 8px 8px 0px #8c979f, 0px 0px 0px 0px #8c979f, 0px 0px 10px 0 #8c979f, 1px 0 0 0 #8c979f inset, 0 1px 0 0 #8c979f inset;
+    border-radius: 8px 8px 8px 8px;
+    transition: all .2s;
+
+}
+
+
+
