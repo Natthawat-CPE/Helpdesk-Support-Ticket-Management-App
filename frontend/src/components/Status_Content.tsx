@@ -7,7 +7,6 @@ import Edit_ContentDrawer from "./Edit_ContentDrawer";
 
 interface Props {
     setOpenDrawer: React.Dispatch<React.SetStateAction<string>>;
-    // setOpenDrawer: React.use;
 }
 const Status_Content: React.FC<Props> = ({setOpenDrawer}) => {
 
@@ -37,13 +36,10 @@ const Status_Content: React.FC<Props> = ({setOpenDrawer}) => {
     { Title: "Resolved" },
     { Title: "Rejected" },
   ];
-
-
   return (
       <div>
         <div>
         </div>
-        {/* <Edit_ContentDrawer/> */}
       <Row>
         {numOfcol.map((item, index) => (
           <Col span={6} id="col-topic">
@@ -88,8 +84,6 @@ const Status_Content: React.FC<Props> = ({setOpenDrawer}) => {
                     marginBottom: 14,
                   }}
                   >
-                  {/* <button onClick={() => handleFunctionCall('true')}>ส่ง True ให้ Drawer </button> */}
-                  
                 <p>{item.Content1}</p>
                 <p>{item.Content2}</p>
                 <p>{item.Content2}</p>

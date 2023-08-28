@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Form, Input, InputNumber } from "antd";
+import { Button, Form, Input } from "antd";
 
 import "./Create_Content.css";
 
@@ -9,7 +9,6 @@ function Create_Content() {
     labelCol: { span: 8 },
   };
 
-  /* eslint-disable no-template-curly-in-string */
   const validateMessages = {
     required: "${label} is required!",
     types: {
@@ -20,7 +19,6 @@ function Create_Content() {
       range: "${label} must be between ${min} and ${max}",
     },
   };
-  /* eslint-enable no-template-curly-in-string */
 
   //TODO ที่ส่งข้อมูลเวลา Submit
   const onFinish = (values: any) => {
@@ -83,7 +81,7 @@ function Create_Content() {
       </Form.Item>
       <br />
       <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
-        <Button type="primary" htmlType="submit" size="large">
+        <Button type="primary" htmlType="submit" size="large" style={{alignItems:'center'}}>
           Submit
         </Button>
       </Form.Item>

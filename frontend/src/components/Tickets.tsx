@@ -26,9 +26,7 @@ const Tickets: React.FC = () => {
   // Set สถานะการเปิด Page ต่างๆ
   const [dataDrawerFromStatus_Content, setDataDrawerFromStatus_Content] = useState('');
   const [statusPage, setStatusPage] = useState("1");
-
   const StatusDrawer = dataDrawerFromStatus_Content !== "";
-  console.log("Boolean:          "+StatusDrawer);
 
   const handleMenuClick = (key: any) => {
     if (key === "1") {
@@ -77,11 +75,9 @@ const Tickets: React.FC = () => {
       <Layout>
         <Content
           style={{
-            // padding: 10,
             minHeight: "100vh",
             maxHeight:"100vh",
             overflowY: 'scroll',
-            // position: 'fixed',
           }}
           id="all-page"
         >
@@ -112,7 +108,6 @@ const Tickets: React.FC = () => {
               // <Table_Content />
               <div>
                 <Status_Content setOpenDrawer={setDataDrawerFromStatus_Content} />
-                {/* <Edit_ContentDrawer setDrawer={StatusDrawer} handleclick={setDataDrawerFromStatus_Content}/> */}
                 <Edit_ContentDrawer setDrawer={StatusDrawer} handleclick={setDataDrawerFromStatus_Content}/>
 
               </div>
