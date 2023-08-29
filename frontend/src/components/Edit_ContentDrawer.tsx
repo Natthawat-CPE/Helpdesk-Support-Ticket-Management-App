@@ -2,25 +2,46 @@ import React, { useState, useEffect } from "react";
 import { Form, Input, Drawer, theme, Button } from "antd";
 import Status_Content from "./Status_Content";
 import Create_Content from "./Create_Content";
+import { Ticket } from "../interfaces/Ticketinterface";
+import {GetTicket} from "../services/TicketService";
+import { error } from "console";
+import Tickets from "./Tickets";
+import Title from "antd/es/skeleton/Title";
 
 interface Props {
   setDrawer: boolean;
   handleclick: (setDrawer: string) => void;
+  TicketID:number;
 }
 
-// const Edit_ContentDrawer: React.FC<Props> = ({openDrawer, handleClick}) => {
-const Edit_ContentDrawer: React.FC<Props> = ({ setDrawer, handleclick }) => {
+const Edit_ContentDrawer: React.FC<Props> = ({ setDrawer, handleclick, TicketID }) => {
+
+  const [dataTicket, setDataTicket] = React.useState<Ticket>();
+
   const handleDrawerClose = () => {
     handleclick("");
   };
-  useEffect(() => {}, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try{
+        const TicketData = await GetTicket(TicketID);
+        await setDataTicket(TicketData);
+      } catch(error) {
+        console.log('Error fetching Ticket data:',error);
+      }
+      // console.log(dataTicket[0].Title);
+    };
+    console.log(dataTicket);
+    fetchData();
+  }, [TicketID]);
+
 
   const layout = {
     wrapperCol: { span: 16 },
     labelCol: { span: 8 },
   };
 
-  /* eslint-disable no-template-curly-in-string */
   const validateMessages = {
     required: "${label} is required!",
     types: {
@@ -72,7 +93,8 @@ const Edit_ContentDrawer: React.FC<Props> = ({ setDrawer, handleclick }) => {
         <Input
           style={{ width: "60%" }}
           size="large"
-          placeholder="Tell me what you need help with."
+          disabled
+          defaultValue={dataTicket?.Title}
         />
       </Form.Item>
       <Form.Item
@@ -83,7 +105,8 @@ const Edit_ContentDrawer: React.FC<Props> = ({ setDrawer, handleclick }) => {
         <Input.TextArea
           style={{ width: "60%" }}
           size="large"
-          placeholder="Please provide further explanation to us regarding the topic you'ev input."
+          disabled
+          defaultValue={dataTicket?.Description}
         />
       </Form.Item>
       <Form.Item
@@ -94,7 +117,8 @@ const Edit_ContentDrawer: React.FC<Props> = ({ setDrawer, handleclick }) => {
         <Input
           style={{ width: "60%" }}
           size="large"
-          placeholder="Enter your name"
+          disabled
+          defaultValue={dataTicket?.User_name}
         />
       </Form.Item>
       <Form.Item
@@ -105,7 +129,8 @@ const Edit_ContentDrawer: React.FC<Props> = ({ setDrawer, handleclick }) => {
         <Input
           style={{ width: "60%" }}
           size="large"
-          placeholder="Enter your Phone number"
+          disabled
+          defaultValue={dataTicket?.Phone}
         />
       </Form.Item>
       <br />

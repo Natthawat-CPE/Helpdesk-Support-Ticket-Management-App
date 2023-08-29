@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Col, Row, Card, Layout, Menu, Button, theme } from "antd";
-import { Key } from "@mui/icons-material";
-import Edit_ContentDrawer from "./Edit_ContentDrawer";
 import {ListTicket} from "../services/TicketService"
-
 import { Ticket } from "../interfaces/Ticketinterface";
 
 interface Props {
@@ -63,24 +60,15 @@ const Status_Content: React.FC<Props> = ({ setOpenDrawer }) => {
         //   console.log("++++INDEX > ARRAY++++")
         // } else if (BeforeTicketCopyforSort.length == 0) { break }
       }
-
       BeforeTicketCopyforSort.forEach(element => {
         console.log(`TicketID: ${element.TicketID}`);
       });
   };
-
   const getTicketAll = async () =>{
     let temp = await ListTicket();
     setTricketAll(temp);
   }
-
   console.log(AfterTicketCopyforSort);
-
-  //TODO Connect Service API
-  
-  
-  
-
 
   useEffect(() => {
     const fetchData = async () => {

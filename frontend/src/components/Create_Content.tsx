@@ -1,9 +1,11 @@
 import React from "react";
 import { Button, Form, Input } from "antd";
-
-import "./Create_Content.css";
+import {Create_Ticket} from "../services/TicketService"
+import {CreateTicket} from "../interfaces/Ticketinterface"
+import "./Create_Content.css"
 
 function Create_Content() {
+
   const layout = {
     wrapperCol: { span: 16 },
     labelCol: { span: 8 },
@@ -21,7 +23,8 @@ function Create_Content() {
   };
 
   //TODO ที่ส่งข้อมูลเวลา Submit
-  const onFinish = (values: any) => {
+  const onFinish = (values: CreateTicket) => {
+    Create_Ticket(values);
     console.log(values);
   };
 
@@ -36,7 +39,7 @@ function Create_Content() {
       <h1 id="topic">Create Ticket</h1>
       <br />
       <Form.Item
-        name={["user", "title"]}
+        name={"Title"}
         label="Title"
         rules={[{ required: true }]}
       >
@@ -47,7 +50,7 @@ function Create_Content() {
         />
       </Form.Item>
       <Form.Item
-        name={["user", "description"]}
+        name={"Description"}
         label="Description"
         rules={[{ required: true }]}
       >
@@ -58,7 +61,7 @@ function Create_Content() {
         />
       </Form.Item>
       <Form.Item
-        name={["user", "name"]}
+        name={"User_name"}
         label="Reporter Name"
         rules={[{ required: true }]}
       >
@@ -69,7 +72,7 @@ function Create_Content() {
         />
       </Form.Item>
       <Form.Item
-        name={["user", "phone"]}
+        name={"Phone"}
         label="Phone"
         rules={[{ required: true }]}
       >
@@ -81,7 +84,7 @@ function Create_Content() {
       </Form.Item>
       <br />
       <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
-        <Button type="primary" htmlType="submit" size="large" style={{alignItems:'center'}}>
+        <Button type="primary" htmlType="submit" size="large" style={{left:'50%'}}>
           Submit
         </Button>
       </Form.Item>

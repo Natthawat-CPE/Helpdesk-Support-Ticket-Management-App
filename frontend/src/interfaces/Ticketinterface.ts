@@ -27,7 +27,6 @@ export interface Ticket{
     Create_time: Date | null,
     Update_time: Date | null,
     StatusID: number,
-    Status: Status,
 }
 
 export interface Status{

@@ -7,10 +7,6 @@ import {
 } from "../interfaces/Ticketinterface";
 
 const apiUrl = "http://localhost:8080";
-//!! CustomerID ??????
-// const customerID = parseInt(localStorage.getItem("uid") + "");
-//!! Ticket ID หาวิธีใส่ตอนกด
-const TicketID = 2;
 
 //GET ListTicket All
 const ListTicket = async () => {
@@ -35,20 +31,23 @@ const ListTicket = async () => {
 };
 
 //GET Ticket/:id
-const GetTicket = async () => {
+const GetTicket = async (TicketID: number) => {
   const requestOptions = {
     method: "GET",
     headers: { "Content-Type": "application/json" },
   };
-  let res = await fetch(`${apiUrl}/GetTicket/${TicketID}`, requestOptions)
-    .then((response) => response.json())
-    .then((res) => {
-      if (res.data) {
-        return res.data;
-      } else {
-        return false;
-      }
-    });
+  try {
+    const response = await fetch(`${apiUrl}/GetTicket/${TicketID}`, requestOptions);
+    const data = await response.json();
+    if (data.data) {
+      return data.data;
+    } else {
+      return false;
+    }
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return false;
+  }
 };
 
 //GET ListTicketPending All
@@ -127,7 +126,7 @@ const ListTicketRejected = async () => {
 };
 
 //PATCH  UpdateTicket/:id
-const UpDateTicket = async (data: UpdateTicket) => {
+const UpDateTicket = async (data: UpdateTicket, TicketID: number) => {
   const requestOptions = {
     method: "PATCH",
     headers: { "Content-Type": "application/json" },
@@ -146,7 +145,10 @@ const UpDateTicket = async (data: UpdateTicket) => {
 };
 
 //PATCH  UpdateStatusTicket/:id
-const UpDateStatusTicket = async (data: UpdateStatusTicket) => {
+const UpDateStatusTicket = async (
+  data: UpdateStatusTicket,
+  TicketID: number
+) => {
   const requestOptions = {
     method: "PATCH",
     headers: { "Content-Type": "application/json" },
@@ -167,7 +169,7 @@ const UpDateStatusTicket = async (data: UpdateStatusTicket) => {
     });
 };
 
-const CreateUser = async (data: CreateTicket) => {
+const Create_Ticket = async (data: CreateTicket) => {
   const requestOptions = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -196,5 +198,5 @@ export {
   ListTicketRejected,
   UpDateTicket,
   UpDateStatusTicket,
-  CreateUser,
+  Create_Ticket,
 };
