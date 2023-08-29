@@ -22,53 +22,57 @@ const Status_Content: React.FC<Props> = ({ setOpenDrawer }) => {
     Ticket[]
   >([]);
 
-  const copyTicket = () => {
-    setBeforeTicketCopyforSort(TicketAll);
-  };
+  // const copyTicket = () => {
+  //   setBeforeTicketCopyforSort(TicketAll);
+  // };
   //TODO function ลบ Array รับข้อมูลแบบ Array ทีละ 1 ตัว
-  const deleteItem = (indexToDelete: number) => {
-    const updatedItems = BeforeTicketCopyforSort.filter(
-      (item, index) => index !== indexToDelete );
-    setBeforeTicketCopyforSort(updatedItems);
-  };
+  // const deleteItem = (indexToDelete: number) => {
+  //   const updatedItems = BeforeTicketCopyforSort.filter(
+  //     (item, index) => index !== indexToDelete );
+  //   setBeforeTicketCopyforSort(updatedItems);
+  // };
 
-  const SortingArray = async () => {
-    const newArray = AfterTicketCopyforSort.filter(item => item == null );
-    setAfterTicketCopyforSort(newArray);
-    const amountArray = BeforeTicketCopyforSort.length;
-    console.log("Original:::"+amountArray);
-    console.log("amount:::"+amountArray);
-    var num = 1;
-      for (let index = 0; index < amountArray; index++) {
-        if (num > 4) {num = 1;}
-        for (let j = 1; j <= 4; j++) {
-        if (BeforeTicketCopyforSort[index].StatusID == num) {
-          num++
-          await setAfterTicketCopyforSort((number) => [
-            ...number,
-            BeforeTicketCopyforSort[index],
-          ]);
-          await deleteItem(index);
-          break
-        }
-      }
-      console.log("จำนวน Array ::::ใหม่ "+AfterTicketCopyforSort.length );
-      console.log("จำนวน Array ::::เดิม "+BeforeTicketCopyforSort.length );
-      console.log("Index รอบที่ ::::เดิม "+index );
+  // const SortingArray = async () => {
+  //   const newArray = AfterTicketCopyforSort.filter(item => item == null );
+  //   setAfterTicketCopyforSort(newArray);
+  //   const amountArray = BeforeTicketCopyforSort.length;
+  //   console.log("Original:::"+amountArray);
+  //   console.log("amount:::"+amountArray);
+  //   var num = 1;
+  //     for (let index = 0; index < amountArray; index++) {
+  //       if (num > 4) {num = 1;}
+  //       for (let j = 1; j <= 4; j++) {
+  //       if (BeforeTicketCopyforSort[index].StatusID == num) {
+  //         num++
+  //         await setAfterTicketCopyforSort((number) => [
+  //           ...number,
+  //           BeforeTicketCopyforSort[index],
+  //         ]);
+  //         await deleteItem(index);
+  //         break
+  //       }
+  //     }
+
+      // console.log("จำนวน Array ::::ใหม่ "+AfterTicketCopyforSort.length );
+      // console.log("จำนวน Array ::::เดิม "+BeforeTicketCopyforSort.length );
+      // console.log("Index รอบที่ ::::เดิม "+index );
+
+
       // if (AfterTicketCopyforSort.length != BeforeTicketCopyforSort.length && index == amountArray ) {
         //   index = 0;
         //   console.log("++++INDEX > ARRAY++++")
         // } else if (BeforeTicketCopyforSort.length == 0) { break }
-      }
-      BeforeTicketCopyforSort.forEach(element => {
-        console.log(`TicketID: ${element.TicketID}`);
-      });
-  };
+      // }
+
+      // BeforeTicketCopyforSort.forEach(element => {
+      //   console.log(`TicketID: ${element.TicketID}`);
+      // });
+  // };
   const getTicketAll = async () =>{
     let temp = await ListTicket();
     setTricketAll(temp);
   }
-  console.log(AfterTicketCopyforSort);
+  // console.log(AfterTicketCopyforSort);
 
   useEffect(() => {
     const fetchData = async () => {

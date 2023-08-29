@@ -17,8 +17,10 @@ interface Props {
 const Edit_ContentDrawer: React.FC<Props> = ({ setDrawer, handleclick, TicketID }) => {
 
   const [dataTicket, setDataTicket] = React.useState<Ticket>();
+  const [form] = Form.useForm();
 
   const handleDrawerClose = () => {
+    form.resetFields();
     handleclick("");
   };
 
@@ -31,8 +33,8 @@ const Edit_ContentDrawer: React.FC<Props> = ({ setDrawer, handleclick, TicketID 
         console.log('Error fetching Ticket data:',error);
       }
       // console.log(dataTicket[0].Title);
+      console.log("UseEffect::"+dataTicket?.TicketID);
     };
-    console.log(dataTicket);
     fetchData();
   }, [TicketID]);
 
@@ -81,6 +83,7 @@ const Edit_ContentDrawer: React.FC<Props> = ({ setDrawer, handleclick, TicketID 
       name="nest-messages"
       onFinish={onFinish}
       validateMessages={validateMessages}
+      form={form}
     >
       <br />
       <h1 id="topic">Update Status</h1>
@@ -143,4 +146,4 @@ const Edit_ContentDrawer: React.FC<Props> = ({ setDrawer, handleclick, TicketID 
     </Drawer>
   );
 };
-export default Edit_ContentDrawer;
+export default React.memo(Edit_ContentDrawer);

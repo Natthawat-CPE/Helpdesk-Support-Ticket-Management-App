@@ -25,7 +25,7 @@ const { Header, Sider, Content } = Layout;
 const Tickets: React.FC = () => {
   // Set สถานะการเปิด Page ต่างๆ
   const [dataDrawerFromStatus_Content, setDataDrawerFromStatus_Content] = useState('');
-  const [TicketID,setTicKetID] = useState(0);
+  const  [TicketID,setTicKetID] = useState(0);
   const [statusPage, setStatusPage] = useState("1");
   const StatusDrawer = dataDrawerFromStatus_Content !== "";
 

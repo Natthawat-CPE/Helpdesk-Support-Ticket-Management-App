@@ -40,7 +40,7 @@ const GetTicket = async (TicketID: number) => {
     const response = await fetch(`${apiUrl}/GetTicket/${TicketID}`, requestOptions);
     const data = await response.json();
     if (data.data) {
-      return data.data;
+      return await data.data;
     } else {
       return false;
     }

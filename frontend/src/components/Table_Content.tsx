@@ -169,10 +169,10 @@ const Table_Content: React.FC<Props> = ({setOpenDrawer, setTicKetID}) => {
   const [TicketAll, setTricketAll] = React.useState<Ticket[]>([]);
 
 
-  const handleRowClick = (record: any) => {
+  const handleRowClick = async (record: any) => {
     console.log("Clicked row with TicketID:", record.TicketID);
     handleFunctionCall('true');
-    setTicKetID(record.TicketID);
+    await setTicKetID(record.TicketID);
   };
 
 
