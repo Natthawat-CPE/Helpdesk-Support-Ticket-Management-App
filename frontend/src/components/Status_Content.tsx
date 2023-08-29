@@ -2,300 +2,167 @@ import React, { useState, useEffect } from "react";
 import { Col, Row, Card, Layout, Menu, Button, theme } from "antd";
 import { Key } from "@mui/icons-material";
 import Edit_ContentDrawer from "./Edit_ContentDrawer";
+import {ListTicket} from "../services/TicketService"
 
-import {Ticket} from "../interfaces/Ticketinterface"
-import { Console } from "console";
-          
-
+import { Ticket } from "../interfaces/Ticketinterface";
 
 interface Props {
-    setOpenDrawer: React.Dispatch<React.SetStateAction<string>>;
+  setOpenDrawer: React.Dispatch<React.SetStateAction<string>>;
 }
-const Status_Content: React.FC<Props> = ({setOpenDrawer}) => {
-
+const Status_Content: React.FC<Props> = ({ setOpenDrawer }) => {
   const [TricketPending, setTricketPending] = React.useState<Ticket[]>([]);
+
   const [TicketAll, setTricketAll] = React.useState<Ticket[]>([]);
-  
+  // console.log(TicketAll);
+
+  //TODO For Sorting ID
+  // Result
+  const [AfterTicketCopyforSort, setAfterTicketCopyforSort] = React.useState<
+    Ticket[]
+  >([]);
+  // Old
+  const [BeforeTicketCopyforSort, setBeforeTicketCopyforSort] = React.useState<
+    Ticket[]
+  >([]);
+
+  const copyTicket = () => {
+    setBeforeTicketCopyforSort(TicketAll);
+  };
+  //TODO function ลบ Array รับข้อมูลแบบ Array ทีละ 1 ตัว
+  const deleteItem = (indexToDelete: number) => {
+    const updatedItems = BeforeTicketCopyforSort.filter(
+      (item, index) => index !== indexToDelete );
+    setBeforeTicketCopyforSort(updatedItems);
+  };
+
+  const SortingArray = async () => {
+    const newArray = AfterTicketCopyforSort.filter(item => item == null );
+    setAfterTicketCopyforSort(newArray);
+    const amountArray = BeforeTicketCopyforSort.length;
+    console.log("Original:::"+amountArray);
+    console.log("amount:::"+amountArray);
+    var num = 1;
+      for (let index = 0; index < amountArray; index++) {
+        if (num > 4) {num = 1;}
+        for (let j = 1; j <= 4; j++) {
+        if (BeforeTicketCopyforSort[index].StatusID == num) {
+          num++
+          await setAfterTicketCopyforSort((number) => [
+            ...number,
+            BeforeTicketCopyforSort[index],
+          ]);
+          await deleteItem(index);
+          break
+        }
+      }
+      console.log("จำนวน Array ::::ใหม่ "+AfterTicketCopyforSort.length );
+      console.log("จำนวน Array ::::เดิม "+BeforeTicketCopyforSort.length );
+      console.log("Index รอบที่ ::::เดิม "+index );
+      // if (AfterTicketCopyforSort.length != BeforeTicketCopyforSort.length && index == amountArray ) {
+        //   index = 0;
+        //   console.log("++++INDEX > ARRAY++++")
+        // } else if (BeforeTicketCopyforSort.length == 0) { break }
+      }
+
+      BeforeTicketCopyforSort.forEach(element => {
+        console.log(`TicketID: ${element.TicketID}`);
+      });
+  };
+
+  const getTicketAll = async () =>{
+    let temp = await ListTicket();
+    setTricketAll(temp);
+  }
+
+  console.log(AfterTicketCopyforSort);
+
   //TODO Connect Service API
-  const apiUrl = "http://localhost:8080";
-  //!! CustomerID ??????
-  // const customerID = parseInt(localStorage.getItem("uid") + "");
-  //!! Ticket ID หาวิธีใส่ตอนกด
-  const TicketID = 2;
-
-  //GET ListTicket All
-  const ListTicket = async () => {
-    const requestOptions = {
-      method: "GET",
-      headers: { "Content-Type": "application/json",
-      },
-    };
-  
-    try {
-      const response = await fetch(`${apiUrl}/ListTickets`, requestOptions);
-      const data = await response.json();
-  
-      if (data.data) {
-        setTricketAll(data.data);
-        console.log(data.data);
-        return data.data;
-      } else {
-        return false;
-      }
-    } catch (error) {
-      console.error("Error fetching data:", error);
-      return false;
-    }
-  }
-
-  //GET Ticket/:id
-  const GetTicket = async () => {
-    const requestOptions = {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    };
-    let res = await fetch(`${apiUrl}/GetTicket/${TicketID}`, requestOptions)
-      .then((response) => response.json())
-      .then((res) => {
-        if (res.data) {
-          return res.data
-
-        } else {
-          return false
-        }
-      });
-      return res
-  };
-
-  //GET ListTicketPending All
-  const ListTicketPending = async () => {
-    const requestOptions = {
-      method: "GET",
-      headers: { "Content-Type": "application/json",
-      },
-    };
-    try {
-      const response = await fetch(`${apiUrl}/ListTicketPending`, requestOptions);
-      const data = await response.json();
-  
-      if (data.data) {
-        setTricketPending(data.data);
-        console.log(data.data);
-        return data.data;
-      } else {
-        return false;
-      }
-    } catch (error) {
-      console.error("Error fetching data:", error);
-      return false;
-    }
-  };
   
   
-
-
-  //GET ListTicketAccepted All
-  const ListTicketAccepted = async () => {
-    const requestOptions = {
-      method: "GET",
-      headers: { "Content-Type": "application/json",
-      },
-    };
   
-    let res = await fetch(`${apiUrl}/ListTicketAccepted`, requestOptions)
-      .then((response) => response.json())
-      .then((res) => {
-        if (res.data) {
-          return res.data;
-        } else {
-          return false;
-        }
-      });
-  
-    return res;
-  }
-
-  //GET ListTicketResolved All
-  const ListTicketResolved = async () => {
-    const requestOptions = {
-      method: "GET",
-      headers: { "Content-Type": "application/json",
-      },
-    };
-  
-    let res = await fetch(`${apiUrl}/ListTicketResolved`, requestOptions)
-      .then((response) => response.json())
-      .then((res) => {
-        if (res.data) {
-          return res.data;
-        } else {
-          return false;
-        }
-      });
-  
-    return res;
-  }
-
-  //GET ListTicketRejected All
-  const ListTicketRejected = async () => {
-    const requestOptions = {
-      method: "GET",
-      headers: { "Content-Type": "application/json",
-      },
-    };
-  
-    let res = await fetch(`${apiUrl}/ListTicketRejected`, requestOptions)
-      .then((response) => response.json())
-      .then((res) => {
-        if (res.data) {
-          return res.data;
-        } else {
-          return false;
-        }
-      });
-  
-    return res;
-  }
-
-  //PATCH  UpdateTicket/:id
-  const UpdateTicket = async () => {
-    // var pphonee = phone.split("-");
-    // var pphonee2 = pphonee[0] + pphonee[1] + pphonee[2];
-    let data = {
-      // ID: customerID,
-      // Name: NAMEa,
-      // CAREER_ID: convertType(Careera),
-      // Phone: pphonee2,
-    };
-
-    const requestOptions = {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    };
-    let res = await fetch(`${apiUrl}/UpdateTicket/${TicketID}`, requestOptions)
-    fetch(apiUrl, requestOptions)
-      .then((response) => response.json())
-      .then((res) => {
-        if (res.data) {
-          return res.data
-        } else {
-          return false
-        }
-      });
-      return res;
-  }
-
-  //PATCH  UpdateStatusTicket/:id
-  const UpdateStatusTicket = async () => {
-    // var pphonee = phone.split("-");
-    // var pphonee2 = pphonee[0] + pphonee[1] + pphonee[2];
-    let data = {
-      // ID: customerID,
-      // Name: NAMEa,
-      // CAREER_ID: convertType(Careera),
-      // Phone: pphonee2,
-    };
-
-    const requestOptions = {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    };
-    let res = await fetch(`${apiUrl}/UpdateStatusTicket/${TicketID}`, requestOptions)
-    fetch(apiUrl, requestOptions)
-      .then((response) => response.json())
-      .then((res) => {
-        if (res.data) {
-          return res.data
-        } else {
-          return false
-        }
-      });
-      return res;
-  }
 
 
   useEffect(() => {
     const fetchData = async () => {
-      await ListTicketPending();
-      await ListTicket();
+      await getTicketAll();
+      // await copyTicket();
+      // await SortingArray();
+      
     };
     fetchData();
   }, []);
 
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-    const handleFunctionCall = (setDrawer: string) =>{
-        setOpenDrawer(setDrawer);
-    }
-
+  const handleFunctionCall = (setDrawer: string) => {
+    setOpenDrawer(setDrawer);
+  };
 
   //TODO dataMock เอาไว้เก็บในส่วนของ body  ตอนนี้ ซึ่งไม่ได้นำไปใช้แบบนี้
   const dataMock = [
-    { Title: "Computer Broken", Content1: "Content 1", Content2: "Content 2" },
-    { Title: "Computer Broken", Content1: "Content 1", Content2: "Content 2" },
-    { Title: "Computer Broken", Content1: "Content 1", Content2: "Content 2" },
-    { Title: "Computer Broken", Content1: "Content 1", Content2: "Content 2" },
-    { Title: "Computer Broken", Content1: "Content 1", Content2: "Content 2" },
-    { Title: "Computer Broken", Content1: "Content 1", Content2: "Content 2" },
-    { Title: "Computer Broken", Content1: "Content 1", Content2: "Content 2" },
-    { Title: "Computer Broken", Content1: "Content 1", Content2: "Content 2" },
-    { Title: "Computer Broken", Content1: "Content 1", Content2: "Content 2" },
-    { Title: "Computer Broken", Content1: "Content 1", Content2: "Content 2" },
+    { Title: "11111111 Broken", Content1: "Content 1", Content2: "Content 2" ,Status_TD:1 },
+    { Title: "11111111 Broken", Content1: "Content 1", Content2: "Content 2" ,Status_TD:2 },
+    { Title: "11111111 Broken", Content1: "Content 1", Content2: "Content 2" ,Status_TD:3 },
+    { Title: "11111111 Broken", Content1: "Content 1", Content2: "Content 2" ,Status_TD:4 },
+    { Title: "11111111 Broken", Content1: "Content 1", Content2: "Content 2" ,Status_TD:1 },
+    { Title: "11111111 Broken", Content1: "Content 1", Content2: "Content 2" ,Status_TD:2 },
+    { Title: "11111111 Broken", Content1: "Content 1", Content2: "Content 2" ,Status_TD:3 },
+    { Title: "11111111 Broken", Content1: "Content 1", Content2: "Content 2" ,Status_TD:4 },
+    { Title: "11111111 Broken", Content1: "Content 1", Content2: "Content 2" ,Status_TD:1 },
+    { Title: "11111111 Broken", Content1: "Content 1", Content2: "Content 2" ,Status_TD:2 },
+
+  ];
+  const dataMock2 = [
+    { Title: "222222222 Broken", Content1: "Content 1", Content2: "Content 2" ,Status_TD:1 },
+    { Title: "222222222 Broken", Content1: "Content 1", Content2: "Content 2" ,Status_TD:2 },
+    { Title: "222222222 Broken", Content1: "Content 1", Content2: "Content 2" ,Status_TD:3 },
+    { Title: "222222222 Broken", Content1: "Content 1", Content2: "Content 2" ,Status_TD:4 },
+    { Title: "222222222 Broken", Content1: "Content 1", Content2: "Content 2" ,Status_TD:1 },
+    { Title: "222222222 Broken", Content1: "Content 1", Content2: "Content 2" ,Status_TD:2 },
+    { Title: "222222222 Broken", Content1: "Content 1", Content2: "Content 2" ,Status_TD:3 },
+    { Title: "222222222 Broken", Content1: "Content 1", Content2: "Content 2" ,Status_TD:4 },
+    { Title: "222222222 Broken", Content1: "Content 1", Content2: "Content 2" ,Status_TD:1 },
+    { Title: "222222222 Broken", Content1: "Content 1", Content2: "Content 2" ,Status_TD:2 },
+
   ];
 
   //TODO numOfcol เอาไว้เก็บในส่วนของหัว Title ตอนนี้ ซึ่งไม่ได้นำไปใช้แบบนี้
   const numOfcol = [
-    { Title: "Pending" },
-    { Title: "Accepted" },
-    { Title: "Resolved" },
-    { Title: "Rejected" },
+    { Title: "Pending", Status_ID: 1 },
+    { Title: "Accepted", Status_ID: 2 },
+    { Title: "Resolved", Status_ID: 3 },
+    { Title: "Rejected", Status_ID: 4 },
   ];
+
   return (
-      <div>
-        <div>
-        </div>
+    <div>
+      <div></div>
       <Row>
         {numOfcol.map((item, index) => (
           <Col span={6} id="col-topic">
-            <div style={{width: "94%"}}>
-
-            <Card
-              title={item.Title}
-              bordered={false}
-              size={"small"}
-              headStyle={{ fontWeight: 900, borderBottom: "0px" }}
-              bodyStyle={{ padding: "1px" }}
-              style={{
-                width: "85%",
-                marginLeft: 24,
-                marginRight: 40,
-                marginTop: 15,
-                textAlign: "center",
-              }}
+            <div style={{ width: "94%" }}>
+              <Card
+                title={item.Title}
+                bordered={false}
+                size={"small"}
+                headStyle={{ fontWeight: 900, borderBottom: "0px" }}
+                bodyStyle={{ padding: "1px" }}
+                style={{
+                  width: "85%",
+                  marginLeft: 24,
+                  marginRight: 40,
+                  marginTop: 15,
+                  textAlign: "center",
+                }}
               ></Card>
-              </div>
+            </div>
           </Col>
         ))}
       </Row>
 
       {/*//TODO Loop สร้าง Ticket */}
-      {TricketPending.map((item, index) => (
+
+      {TicketAll.map((item, index) => (
         <Row>
-          {numOfcol.map((num = item, point) => (
+          {numOfcol.map((item2, point) => (
             <Col span={6} id="col">
               <div style={{width: "94%"}} onClick={() =>handleFunctionCall('true')}>
 
@@ -323,6 +190,6 @@ const Status_Content: React.FC<Props> = ({setOpenDrawer}) => {
       ))}
     </div>
   );
-}
+};
 
 export default Status_Content;
