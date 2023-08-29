@@ -25,7 +25,7 @@ const { Header, Sider, Content } = Layout;
 const Tickets: React.FC = () => {
   // Set สถานะการเปิด Page ต่างๆ
   const [dataDrawerFromStatus_Content, setDataDrawerFromStatus_Content] = useState('');
-  const  [TicketID,setTicKetID] = useState(0);
+  const [TicketID,setTicKetID] = useState(0);
   const [statusPage, setStatusPage] = useState("1");
   const StatusDrawer = dataDrawerFromStatus_Content !== "";
 
@@ -55,12 +55,12 @@ const Tickets: React.FC = () => {
           defaultSelectedKeys={["1"]}
           items={[
             {
-              key: "1",
+              key: "2",
               icon: <TableChartIcon />,
               label: "Status Board",
             },
             {
-              key: "2",
+              key: "1",
               icon: <TableRowsIcon />,
               label: "Status Table",
             },
@@ -105,14 +105,14 @@ const Tickets: React.FC = () => {
           Helpdesk Support Ticket Management
         </Header>
           <div>
-            {statusPage === "1" ? (
+            {statusPage === "2" ? (
               // <Table_Content />
               <div>
                 <Status_Content setOpenDrawer={setDataDrawerFromStatus_Content} />
                 <Edit_ContentDrawer setDrawer={StatusDrawer} handleclick={setDataDrawerFromStatus_Content} TicketID={TicketID}/>
 
               </div>
-            ) : statusPage === "2" ? (
+            ) : statusPage === "1" ? (
               <div>
               <Table_Content setOpenDrawer={setDataDrawerFromStatus_Content} setTicKetID={setTicKetID} />
               <Edit_ContentDrawer setDrawer={StatusDrawer} handleclick={setDataDrawerFromStatus_Content} TicketID={TicketID}/>

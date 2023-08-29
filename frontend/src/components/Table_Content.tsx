@@ -124,10 +124,10 @@ const columns: ColumnsType<DataType> = [
       let color = "volcano";
       let status = "default";
       if (tag === 1) {
-        color = "geekblue";
+        color = "orange";
         status = "pending";
       } else if (tag === 2) {
-        color = "orange";
+        color = "blue";
         status = "accepted";
       } else if (tag === 3) {
         color = "green";
@@ -222,4 +222,4 @@ const Table_Content: React.FC<Props> = ({setOpenDrawer, setTicKetID}) => {
   );
 };
 
-export default Table_Content;
+export default React.memo (Table_Content);

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Form, Input, Drawer, theme, Button } from "antd";
+import { Form, Input, Drawer, theme, Button,Tag } from "antd";
 import Status_Content from "./Status_Content";
 import Create_Content from "./Create_Content";
 import { Ticket } from "../interfaces/Ticketinterface";
@@ -7,6 +7,8 @@ import {GetTicket} from "../services/TicketService";
 import { error } from "console";
 import Tickets from "./Tickets";
 import Title from "antd/es/skeleton/Title";
+import { redirect } from "react-router-dom";
+import Button2 from '@mui/material/Button';
 
 interface Props {
   setDrawer: boolean;
@@ -33,6 +35,7 @@ const Edit_ContentDrawer: React.FC<Props> = ({ setDrawer, handleclick, TicketID 
         console.log('Error fetching Ticket data:',error);
       }
       // console.log(dataTicket[0].Title);
+      
       console.log("UseEffect::"+dataTicket?.TicketID);
     };
     fetchData();
@@ -137,10 +140,14 @@ const Edit_ContentDrawer: React.FC<Props> = ({ setDrawer, handleclick, TicketID 
         />
       </Form.Item>
       <br />
-      <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
-        <Button type="primary" htmlType="submit" size="large" style={{alignItems:'center', marginLeft:'75px'}}>
-          Submit
-        </Button>
+
+      <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 4 }} >
+        <div style={{display:'flex'}}>
+        <Button2 variant="outlined" color="warning" style={{margin:'10px'}} key={1} >Pending</Button2>
+        <Button2 variant="outlined" color="info" style={{margin:'10px'}} key={2}>Accepted</Button2>
+        <Button2 variant="outlined" color="success" style={{margin:'10px'}} key={3}>Resolved</Button2>
+        <Button2 variant="outlined" color="error" style={{margin:'10px'}} key={4}>Rejected</Button2>
+        </div>
       </Form.Item>
     </Form>
     </Drawer>
