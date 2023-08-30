@@ -6,6 +6,10 @@
   overflow: scroll;
 }
 
+#txtSider{
+  text-shadow: 2px 2px 8px #8c979f;
+}
+
 [id~="colTopic"] {
   width: 200px;
   padding-bottom: 5px;
@@ -52,12 +56,12 @@
 [id~="cardTicket"] {
   width: 100%;
   margin: 2%;
-  border-radius: 15px 15px 15px 15px;
+  border-radius: 10px 10px 10px 10px;
   font-size:small;
 }
 
 [id~="T-br-Pen"] {
-  border: 1px solid #ffd591;
+  border: 2px solid #ffd591;
 }
 [id~="T-br-Pen"]:hover {
   border: 1px solid #ffd591;

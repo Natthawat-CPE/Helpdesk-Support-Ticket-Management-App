@@ -96,17 +96,23 @@ const Status_Content: React.FC<Props> = ({ setOpenDrawer }) => {
     fetchData();
   }, []);
 
-  const handleFunctionCall = (setDrawer: string) => {
+  const handleFunctionCall = (setDrawer: any) => {
     setOpenDrawer(setDrawer);
   };
 
+  const handleRowClick = async (item: any) => {
+    console.log("Clicked row with TicketID:", item);
+    handleFunctionCall('true');
+    // await setTicKetID(record.TicketID);
+  };
+
   //TODO numOfcol เอาไว้เก็บในส่วนของหัว Title ตอนนี้ ซึ่งไม่ได้นำไปใช้แบบนี้
-  const ColumnTopic = [
-    { Title: "Pending", Status_ID: 1 },
-    { Title: "Accepted", Status_ID: 2 },
-    { Title: "Resolved", Status_ID: 3 },
-    { Title: "Rejected", Status_ID: 4 },
-  ];
+  const ColumnTopic = {
+    col1: "Pending",
+    col2: "Accepted",
+    col3: "Resolved", 
+    col4: "Rejected", 
+  };
 
   return (
     <div>
@@ -114,7 +120,7 @@ const Status_Content: React.FC<Props> = ({ setOpenDrawer }) => {
         <Col span={6} id="colTopic borderTopic">
           <Card
             id="cardTopic cardPending"
-            title={ColumnTopic[0].Title}
+            title={ColumnTopic.col1}
             bordered={false}
             size={"small"}
             headStyle={{
@@ -135,7 +141,7 @@ const Status_Content: React.FC<Props> = ({ setOpenDrawer }) => {
         <Col span={6} id="colTopic borderTopic">
           <Card
             id="cardTopic"
-            title={ColumnTopic[1].Title}
+            title={ColumnTopic.col2}
             bordered={false}
             size={"small"}
             headStyle={{
@@ -156,7 +162,7 @@ const Status_Content: React.FC<Props> = ({ setOpenDrawer }) => {
         <Col span={6} id="colTopic borderTopic">
           <Card
             id="cardTopic"
-            title={ColumnTopic[2].Title}
+            title={ColumnTopic.col3}
             bordered={false}
             size={"small"}
             headStyle={{
@@ -177,7 +183,7 @@ const Status_Content: React.FC<Props> = ({ setOpenDrawer }) => {
         <Col span={6} id="colTopic borderTopic  ">
           <Card
             id="cardTopic"
-            title={ColumnTopic[3].Title}
+            title={ColumnTopic.col4}
             bordered={false}
             size={"small"}
             headStyle={{
@@ -201,12 +207,19 @@ const Status_Content: React.FC<Props> = ({ setOpenDrawer }) => {
           <Row id="rowTicket">
             <br />
             {TricketPending.map((item, index) => (
+              
               <Card
                 title={item.Title}
                 id="cardTicket T-br-Pen"
                 bordered={false}
                 size={"small"}
+                onClick={() =>handleRowClick(item)}
+                // onClick={(item) => ({
+                //   onClick: () => handleRowClick(item)
+                // })}
+                headStyle={{background: "#fff7e6"}}
                 bodyStyle={{ textAlign: "start", marginLeft: "5%" }}
+
               >
                 <p>
                   <b>Description: </b>
@@ -229,6 +242,8 @@ const Status_Content: React.FC<Props> = ({ setOpenDrawer }) => {
                   {moment(item.Update_time).format("YYYY-MM-DD,  HH:mm ")}
                 </p>
               </Card>
+              
+
             ))}
           </Row>
         </Col>
@@ -242,6 +257,8 @@ const Status_Content: React.FC<Props> = ({ setOpenDrawer }) => {
                 id="cardTicket T-br-Acc"
                 bordered={false}
                 size={"small"}
+                onClick={() =>handleRowClick(item)}
+                headStyle={{background: "#e6f4ff"}}
                 bodyStyle={{ textAlign: "start", marginLeft: "5%" }}
               >
                 <p>
@@ -278,6 +295,8 @@ const Status_Content: React.FC<Props> = ({ setOpenDrawer }) => {
                 id="cardTicket T-br-Res"
                 bordered={false}
                 size={"small"}
+                onClick={() =>handleRowClick(item)}
+                headStyle={{background:'#f6ffed'}}
                 bodyStyle={{ textAlign: "start", marginLeft: "5%" }}
               >
                 <p>
@@ -314,7 +333,9 @@ const Status_Content: React.FC<Props> = ({ setOpenDrawer }) => {
                 id="cardTicket T-br-Rej"
                 bordered={false}
                 size={"small"}
+                onClick={() =>handleRowClick(item)}
                 bodyStyle={{ textAlign: "start", marginLeft: "5%" }}
+                headStyle={{background:'#fff1f09e'}}
               >
                 <p>
                   <b>Description: </b>
