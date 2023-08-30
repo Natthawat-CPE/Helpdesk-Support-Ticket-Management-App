@@ -9,6 +9,7 @@ import {
 } from "../services/TicketService";
 import { Ticket } from "../interfaces/Ticketinterface";
 import "./Tickets.css";
+import moment from "moment";
 
 interface Props {
   setOpenDrawer: React.Dispatch<React.SetStateAction<string>>;
@@ -205,7 +206,29 @@ const Status_Content: React.FC<Props> = ({ setOpenDrawer }) => {
                 id="cardTicket T-br-Pen"
                 bordered={false}
                 size={"small"}
-              ></Card>
+                bodyStyle={{ textAlign: "start", marginLeft: "5%" }}
+              >
+                <p>
+                  <b>Description: </b>
+                  {item.Description}
+                </p>
+                <p>
+                  <b>Reporter Name: </b>
+                  {item.User_name}
+                </p>
+                <p>
+                  <b>Phone: </b>
+                  {item.Phone}
+                </p>
+                <p>
+                  <b>Created Timestamp: </b>
+                  {moment(item.Create_time).format("YYYY-MM-DD,  HH:mm ")}
+                </p>
+                <p>
+                  <b>Update Timestamp: </b>
+                  {moment(item.Update_time).format("YYYY-MM-DD,  HH:mm ")}
+                </p>
+              </Card>
             ))}
           </Row>
         </Col>
@@ -219,7 +242,29 @@ const Status_Content: React.FC<Props> = ({ setOpenDrawer }) => {
                 id="cardTicket T-br-Acc"
                 bordered={false}
                 size={"small"}
-              ></Card>
+                bodyStyle={{ textAlign: "start", marginLeft: "5%" }}
+              >
+                <p>
+                  <b>Description: </b>
+                  {item.Description}
+                </p>
+                <p>
+                  <b>Reporter Name: </b>
+                  {item.User_name}
+                </p>
+                <p>
+                  <b>Phone: </b>
+                  {item.Phone}
+                </p>
+                <p>
+                  <b>Created Timestamp: </b>
+                  {moment(item.Create_time).format("YYYY-MM-DD,  HH:mm ")}
+                </p>
+                <p>
+                  <b>Update Timestamp: </b>
+                  {moment(item.Update_time).format("YYYY-MM-DD,  HH:mm ")}
+                </p>
+              </Card>
             ))}
           </Row>
         </Col>
@@ -233,7 +278,29 @@ const Status_Content: React.FC<Props> = ({ setOpenDrawer }) => {
                 id="cardTicket T-br-Res"
                 bordered={false}
                 size={"small"}
-              ></Card>
+                bodyStyle={{ textAlign: "start", marginLeft: "5%" }}
+              >
+                <p>
+                  <b>Description: </b>
+                  {item.Description}
+                </p>
+                <p>
+                  <b>Reporter Name: </b>
+                  {item.User_name}
+                </p>
+                <p>
+                  <b>Phone: </b>
+                  {item.Phone}
+                </p>
+                <p>
+                  <b>Created Timestamp: </b>
+                  {moment(item.Create_time).format("YYYY-MM-DD,  HH:mm ")}
+                </p>
+                <p>
+                  <b>Update Timestamp: </b>
+                  {moment(item.Update_time).format("YYYY-MM-DD,  HH:mm ")}
+                </p>
+              </Card>
             ))}
           </Row>
         </Col>
@@ -247,7 +314,29 @@ const Status_Content: React.FC<Props> = ({ setOpenDrawer }) => {
                 id="cardTicket T-br-Rej"
                 bordered={false}
                 size={"small"}
-              ></Card>
+                bodyStyle={{ textAlign: "start", marginLeft: "5%" }}
+              >
+                <p>
+                  <b>Description: </b>
+                  {item.Description}
+                </p>
+                <p>
+                  <b>Reporter Name: </b>
+                  {item.User_name}
+                </p>
+                <p>
+                  <b>Phone: </b>
+                  {item.Phone}
+                </p>
+                <p>
+                  <b>Created Timestamp: </b>
+                  {moment(item.Create_time).format("YYYY-MM-DD,  HH:mm ")}
+                </p>
+                <p>
+                  <b>Update Timestamp: </b>
+                  {moment(item.Update_time).format("YYYY-MM-DD,  HH:mm ")}
+                </p>
+              </Card>
             ))}
           </Row>
         </Col>
