@@ -1,7 +1,6 @@
 import React from "react";
 import {
   CreateTicket,
-  UpdateStatusTicket,
   UpdateTicket,
   Ticket,
 } from "../interfaces/Ticketinterface";
@@ -169,13 +168,13 @@ const UpDateTicket = async (data: UpdateTicket, TicketID: number) => {
 
 //PATCH  UpdateStatusTicket/:id
 const UpDateStatusTicket = async (
-  data: UpdateStatusTicket,
-  TicketID: number
+  StatusUpdate: any,
+  TicketID: any
 ) => {
   const requestOptions = {
     method: "PATCH",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data),
+    body: JSON.stringify(StatusUpdate),
   };
   let res = await fetch(
     `${apiUrl}/UpdateStatusTicket/${TicketID}`,

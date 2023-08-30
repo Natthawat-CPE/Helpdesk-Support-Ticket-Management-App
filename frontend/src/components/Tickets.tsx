@@ -23,7 +23,6 @@ import Edit_ContentDrawer from "./Edit_ContentDrawer";
 const { Header, Sider, Content } = Layout;
 
 const Tickets: React.FC = () => {
-  // Set สถานะการเปิด Page ต่างๆ
   const [dataDrawerFromStatus_Content, setDataDrawerFromStatus_Content] = useState('');
   const [TicketID,setTicKetID] = useState(1);
   const [statusPage, setStatusPage] = useState("1");
@@ -39,7 +38,6 @@ const Tickets: React.FC = () => {
     }
   };
 
-  //Set ปิดเปิด ข้างๆ
   const [collapsed, setCollapsed] = useState(false);
   const {
     token: { colorBgContainer },
@@ -101,7 +99,6 @@ const Tickets: React.FC = () => {
         </Header>
           <div>
             {statusPage === "1" ? (
-              // <Table_Content />
               <div>
                 <Status_Content setOpenDrawer={setDataDrawerFromStatus_Content} />
                 <Edit_ContentDrawer setDrawer={StatusDrawer} handleclick={setDataDrawerFromStatus_Content} TicketID={TicketID}/>

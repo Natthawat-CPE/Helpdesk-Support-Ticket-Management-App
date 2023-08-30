@@ -5,11 +5,6 @@ export interface CreateTicket{
     Phone: string
 }
 
-export interface UpdateStatusTicket{
-    TicketID: number,
-    StatusID: number,
-}
-
 export interface UpdateTicket{
     TicketID: number,
     Title: string,

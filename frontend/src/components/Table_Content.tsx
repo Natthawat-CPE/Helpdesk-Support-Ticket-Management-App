@@ -5,8 +5,6 @@ import { Ticket } from "../interfaces/Ticketinterface";
 import { ListTicket } from "../services/TicketService";
 import moment from "moment";
 
-
-
 interface DataType {
   TicketID: number;
   Title: string;
@@ -61,36 +59,6 @@ const columns: ColumnsType<DataType> = [
       return dateA - dateB;
     },
   },
-  // {
-  //   title: "Status",
-  //   dataIndex: "StatusID",
-  //   // filters: [
-  //   //   {
-  //   //     text: "Joe",
-  //   //     value: "1",
-  //   //   },
-  //   //   {
-  //   //     text: "Jim",
-  //   //     value: "Jim",
-  //   //   },
-  //   //   {
-  //   //     text: "Submenu",
-  //   //     value: "Submenu",
-  //   //     children: [
-  //   //       {
-  //   //         text: "Green",
-  //   //         value: "Green",
-  //   //       },
-  //   //       {
-  //   //         text: "Black",
-  //   //         value: "Black",
-  //   //       },
-  //   //     ],
-  //   //   },
-  //   // ],
-  //   // onFilter: (value: any, record) => record.StatusID === value,
-  //   // sortDirections: ["descend"],
-  // },
   {
     title: "Status",
     key: "StatusID",
@@ -221,5 +189,4 @@ const Table_Content: React.FC<Props> = ({setOpenDrawer, setTicKetID}) => {
     />
   );
 };
-
 export default React.memo (Table_Content);
