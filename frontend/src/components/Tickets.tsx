@@ -55,12 +55,12 @@ const Tickets: React.FC = () => {
           defaultSelectedKeys={["1"]}
           items={[
             {
-              key: "2",
+              key: "1",
               icon: <TableChartIcon />,
               label: "Status Board",
             },
             {
-              key: "1",
+              key: "2",
               icon: <TableRowsIcon />,
               label: "Status Table",
             },
@@ -75,12 +75,7 @@ const Tickets: React.FC = () => {
       </Sider>
       <Layout>
         <Content
-          style={{
-            minHeight: "100vh",
-            maxHeight:"100vh",
-            overflowY: 'scroll',
-          }}
-          id="all-page"
+          id="content"
         >
 
           <Header
@@ -105,14 +100,14 @@ const Tickets: React.FC = () => {
           Helpdesk Support Ticket Management
         </Header>
           <div>
-            {statusPage === "2" ? (
+            {statusPage === "1" ? (
               // <Table_Content />
               <div>
                 <Status_Content setOpenDrawer={setDataDrawerFromStatus_Content} />
                 <Edit_ContentDrawer setDrawer={StatusDrawer} handleclick={setDataDrawerFromStatus_Content} TicketID={TicketID}/>
 
               </div>
-            ) : statusPage === "1" ? (
+            ) : statusPage === "2" ? (
               <div>
               <Table_Content setOpenDrawer={setDataDrawerFromStatus_Content} setTicKetID={setTicKetID} />
               <Edit_ContentDrawer setDrawer={StatusDrawer} handleclick={setDataDrawerFromStatus_Content} TicketID={TicketID}/>

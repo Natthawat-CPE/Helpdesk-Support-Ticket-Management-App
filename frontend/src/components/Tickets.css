@@ -1,32 +1,96 @@
-#all-page{
-    background-color: #fff;
+#content {
+  /* background-color: #ececec7a;   */
+  background-color: #fff;
+  min-height: 100vh;
+  max-height: 100vh;
+  overflow: scroll;
 }
 
-#col{
-    width: 200px;
-    display: flex;
-    flex: auto;
-    margin: 0px 3px 0px 3px;
-    background-color: #f4f4f4;
+[id~="colTopic"] {
+  width: 200px;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  display: flex;
+  flex: auto;
+  text-align: center;
+  background-color: #ececec7a;
+  /* background-color: #fff; */
+  /* margin: 0px 5px 0px 5px; */
+  /* position: relative; */
 }
 
-#col-topic{
-    width: 200px;
-    display: flex;
-    flex: auto;
-    margin: 0px 3px 0px 3px;
-    background-color: #f4f4f4;
+[id~="borderTopic"] {
+  border-right: 1px solid #d4d4d4;
+  border-bottom: 1px solid #d4d4d4;
 }
 
-
-#card:hover{
-    /* background-color: aqua; */
-    cursor: pointer;
-    box-shadow: 8px 8px 8px 0px #8c979f, 0px 0px 0px 0px #8c979f, 0px 0px 10px 0 #8c979f, 1px 0 0 0 #8c979f inset, 0 1px 0 0 #8c979f inset;
-    border-radius: 8px 8px 8px 8px;
-    transition: all .2s;
-
+[id~="cardTopic"] {
+  width: 100%;
+  margin: 2%;
+  border-radius: 15px 15px 15px 15px;
 }
 
+[id~="colTicket"] {
+  width: 200px;
+  display: flex;
+  flex: auto;
+  text-align: center;
+  /* margin: 0px 5px 0px 5px; */
+  /* background-color: #ececec7a; */
+  background-color: #fff;
+}
 
+[id~="borderTicket"] {
+  border-right: 1px solid #d4d4d4;
+  /* border-left: 1px solid #d4d4d4; */
+}
 
+#rowTicket {
+  height: fit-content;
+}
+
+[id~="cardTicket"] {
+  width: 100%;
+  margin: 2%;
+  border-radius: 15px 15px 15px 15px;
+}
+
+[id~="T-br-Pen"] {
+  border: 1px solid #ffd591;
+}
+[id~="T-br-Pen"]:hover {
+  border: 1px solid #ffd591;
+  box-shadow: 2px 2px 2px 0px #ffd591, 0px 0px 0px 0px #ffd591,
+    0px 0px 5px 0 #ffd591, 1px 0 0 0 #ffd591 inset, 0 1px 0 0 #ffd591 inset;
+}
+[id~="T-br-Acc"] {
+  border: 1px solid #91caff;
+}
+[id~="T-br-Acc"]:hover {
+  border: 1px solid #91caff;
+  box-shadow: 2px 2px 2px 0px #91caff, 0px 0px 0px 0px #91caff,
+    0px 0px 5px 0 #91caff, 1px 0 0 0 #91caff inset, 0 1px 0 0 #91caff inset;
+}
+[id~="T-br-Res"] {
+  border: 1px solid #b7eb8f;
+}
+[id~="T-br-Res"]:hover {
+  border: 1px solid #b7eb8f;
+  box-shadow: 2px 2px 2px 0px #b7eb8f, 0px 0px 0px 0px #b7eb8f,
+    0px 0px 5px 0 #b7eb8f, 1px 0 0 0 #b7eb8f inset, 0 1px 0 0 #b7eb8f inset;
+}
+
+[id~="T-br-Rej"] {
+  border: 1px solid #ffa39e;
+}
+[id~="T-br-Rej"]:hover {
+  border: 1px solid #ffa39e;
+  box-shadow: 2px 2px 2px 0px #ffa39e, 0px 0px 0px 0px #ffa39e,
+    0px 0px 5px 0 #ffa39e, 1px 0 0 0 #ffa39e inset, 0 1px 0 0 #ffa39e inset;
+}
+
+[id~="cardTicket"]:hover {
+  cursor: pointer;
+  transition: all 0.2s;
+  border-radius: 8px 8px 8px 8px;
+}

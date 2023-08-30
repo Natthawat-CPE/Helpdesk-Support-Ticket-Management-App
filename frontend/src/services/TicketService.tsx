@@ -37,7 +37,10 @@ const GetTicket = async (TicketID: number) => {
     headers: { "Content-Type": "application/json" },
   };
   try {
-    const response = await fetch(`${apiUrl}/GetTicket/${TicketID}`, requestOptions);
+    const response = await fetch(
+      `${apiUrl}/GetTicket/${TicketID}`,
+      requestOptions
+    );
     const data = await response.json();
     if (data.data) {
       return await data.data;
@@ -77,16 +80,22 @@ const ListTicketAccepted = async () => {
     method: "GET",
     headers: { "Content-Type": "application/json" },
   };
+  try {
+    const response = await fetch(
+      `${apiUrl}/ListTicketAccepted`,
+      requestOptions
+    );
+    const data = await response.json();
 
-  let res = await fetch(`${apiUrl}/ListTicketAccepted`, requestOptions)
-    .then((response) => response.json())
-    .then((res) => {
-      if (res.data) {
-        return res.data;
-      } else {
-        return false;
-      }
-    });
+    if (data.data) {
+      return data.data;
+    } else {
+      return false;
+    }
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return false;
+  }
 };
 
 //GET ListTicketResolved All
@@ -96,15 +105,22 @@ const ListTicketResolved = async () => {
     headers: { "Content-Type": "application/json" },
   };
 
-  let res = await fetch(`${apiUrl}/ListTicketResolved`, requestOptions)
-    .then((response) => response.json())
-    .then((res) => {
-      if (res.data) {
-        return res.data;
-      } else {
-        return false;
-      }
-    });
+  try {
+    const response = await fetch(
+      `${apiUrl}/ListTicketResolved`,
+      requestOptions
+    );
+    const data = await response.json();
+
+    if (data.data) {
+      return data.data;
+    } else {
+      return false;
+    }
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return false;
+  }
 };
 
 //GET ListTicketRejected All
@@ -114,15 +130,22 @@ const ListTicketRejected = async () => {
     headers: { "Content-Type": "application/json" },
   };
 
-  let res = await fetch(`${apiUrl}/ListTicketRejected`, requestOptions)
-    .then((response) => response.json())
-    .then((res) => {
-      if (res.data) {
-        return res.data;
-      } else {
-        return false;
-      }
-    });
+  try {
+    const response = await fetch(
+      `${apiUrl}/ListTicketRejected`,
+      requestOptions
+    );
+    const data = await response.json();
+
+    if (data.data) {
+      return data.data;
+    } else {
+      return false;
+    }
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return false;
+  }
 };
 
 //PATCH  UpdateTicket/:id
