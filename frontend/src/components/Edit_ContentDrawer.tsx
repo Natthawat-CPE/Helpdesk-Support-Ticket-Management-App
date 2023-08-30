@@ -31,6 +31,7 @@ const Edit_ContentDrawer: React.FC<Props> = ({ setDrawer, handleclick, TicketID 
       try{
         const TicketData = await GetTicket(TicketID);
         await setDataTicket(TicketData);
+        form.resetFields();
       } catch(error) {
         console.log('Error fetching Ticket data:',error);
       }
@@ -40,6 +41,20 @@ const Edit_ContentDrawer: React.FC<Props> = ({ setDrawer, handleclick, TicketID 
     };
     fetchData();
   }, [TicketID]);
+
+// Fix bug pull data to slowly
+  // useEffect(() => {
+  //   if (TicketID) {
+  //     const timeout = setTimeout(() => {
+  //       console.log("I am here");
+  //       form.resetFields();
+  //     }, 100);
+
+  //     return () => {
+  //       clearTimeout(timeout); // เคลียร์ timeout หาก Component unmount ก่อนหน่วงเวลาเสร็จ
+  //     };
+  //   }
+  // }, [TicketID]);
 
 
   const layout = {
