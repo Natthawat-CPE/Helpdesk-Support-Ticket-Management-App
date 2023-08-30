@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Col, Row, Card, Layout, Menu, Button, theme } from "antd";
 import {
-  ListTicket,
   ListTicketPending,
   ListTicketAccepted,
   ListTicketResolved,
@@ -13,71 +12,14 @@ import moment from "moment";
 
 interface Props {
   setOpenDrawer: React.Dispatch<React.SetStateAction<string>>;
+  setTicKetID: React.Dispatch<React.SetStateAction<number>>;
 }
-const Status_Content: React.FC<Props> = ({ setOpenDrawer }) => {
+const Status_Content: React.FC<Props> = ({ setOpenDrawer , setTicKetID }) => {
   const [TricketPending, setTricketPending] = React.useState<Ticket[]>([]);
   const [TricketAccepted, setTricketAccepted] = React.useState<Ticket[]>([]);
   const [TricketResolved, setTricketResolved] = React.useState<Ticket[]>([]);
   const [TricketRejected, setTricketRejected] = React.useState<Ticket[]>([]);
 
-  // const [TicketAll, setTricketAll] = React.useState<Ticket[]>([]);
-  // console.log(TicketAll);
-
-  //TODO For Sorting ID
-  // Result
-  // const [AfterTicketCopyforSort, setAfterTicketCopyforSort] = React.useState<
-  //   Ticket[]
-  // >([]);
-  // // Old
-  // const [BeforeTicketCopyforSort, setBeforeTicketCopyforSort] = React.useState<
-  //   Ticket[]
-  // >([]);
-
-  // const copyTicket = () => {
-  //   setBeforeTicketCopyforSort(TicketAll);
-  // };
-  //TODO function ลบ Array รับข้อมูลแบบ Array ทีละ 1 ตัว
-  // const deleteItem = (indexToDelete: number) => {
-  //   const updatedItems = BeforeTicketCopyforSort.filter(
-  //     (item, index) => index !== indexToDelete );
-  //   setBeforeTicketCopyforSort(updatedItems);
-  // };
-
-  // const SortingArray = async () => {
-  //   const newArray = AfterTicketCopyforSort.filter(item => item == null );
-  //   setAfterTicketCopyforSort(newArray);
-  //   const amountArray = BeforeTicketCopyforSort.length;
-  //   console.log("Original:::"+amountArray);
-  //   console.log("amount:::"+amountArray);
-  //   var num = 1;
-  //     for (let index = 0; index < amountArray; index++) {
-  //       if (num > 4) {num = 1;}
-  //       for (let j = 1; j <= 4; j++) {
-  //       if (BeforeTicketCopyforSort[index].StatusID == num) {
-  //         num++
-  //         await setAfterTicketCopyforSort((number) => [
-  //           ...number,
-  //           BeforeTicketCopyforSort[index],
-  //         ]);
-  //         await deleteItem(index);
-  //         break
-  //       }
-  //     }
-
-  // console.log("จำนวน Array ::::ใหม่ "+AfterTicketCopyforSort.length );
-  // console.log("จำนวน Array ::::เดิม "+BeforeTicketCopyforSort.length );
-  // console.log("Index รอบที่ ::::เดิม "+index );
-
-  // if (AfterTicketCopyforSort.length != BeforeTicketCopyforSort.length && index == amountArray ) {
-  //   index = 0;
-  //   console.log("++++INDEX > ARRAY++++")
-  // } else if (BeforeTicketCopyforSort.length == 0) { break }
-  // }
-
-  // BeforeTicketCopyforSort.forEach(element => {
-  //   console.log(`TicketID: ${element.TicketID}`);
-  // });
-  // };
   const getTicketAll = async () => {
     let pending: any = await ListTicketPending();
     let accepted: any = await ListTicketAccepted();
@@ -103,10 +45,9 @@ const Status_Content: React.FC<Props> = ({ setOpenDrawer }) => {
   const handleRowClick = async (item: any) => {
     console.log("Clicked row with TicketID:", item);
     handleFunctionCall('true');
-    // await setTicKetID(record.TicketID);
+    setTicKetID(item);
   };
 
-  //TODO numOfcol เอาไว้เก็บในส่วนของหัว Title ตอนนี้ ซึ่งไม่ได้นำไปใช้แบบนี้
   const ColumnTopic = {
     col1: "Pending",
     col2: "Accepted",
@@ -213,10 +154,7 @@ const Status_Content: React.FC<Props> = ({ setOpenDrawer }) => {
                 id="cardTicket T-br-Pen"
                 bordered={false}
                 size={"small"}
-                onClick={() =>handleRowClick(item)}
-                // onClick={(item) => ({
-                //   onClick: () => handleRowClick(item)
-                // })}
+                onClick={() =>handleRowClick(item.TicketID)}
                 headStyle={{background: "#fff7e6"}}
                 bodyStyle={{ textAlign: "start", marginLeft: "5%" }}
 
@@ -257,7 +195,7 @@ const Status_Content: React.FC<Props> = ({ setOpenDrawer }) => {
                 id="cardTicket T-br-Acc"
                 bordered={false}
                 size={"small"}
-                onClick={() =>handleRowClick(item)}
+                onClick={() =>handleRowClick(item.TicketID)}
                 headStyle={{background: "#e6f4ff"}}
                 bodyStyle={{ textAlign: "start", marginLeft: "5%" }}
               >
@@ -295,7 +233,7 @@ const Status_Content: React.FC<Props> = ({ setOpenDrawer }) => {
                 id="cardTicket T-br-Res"
                 bordered={false}
                 size={"small"}
-                onClick={() =>handleRowClick(item)}
+                onClick={() =>handleRowClick(item.TicketID)}
                 headStyle={{background:'#f6ffed'}}
                 bodyStyle={{ textAlign: "start", marginLeft: "5%" }}
               >
@@ -333,7 +271,7 @@ const Status_Content: React.FC<Props> = ({ setOpenDrawer }) => {
                 id="cardTicket T-br-Rej"
                 bordered={false}
                 size={"small"}
-                onClick={() =>handleRowClick(item)}
+                onClick={() =>handleRowClick(item.TicketID)}
                 bodyStyle={{ textAlign: "start", marginLeft: "5%" }}
                 headStyle={{background:'#fff1f09e'}}
               >
@@ -365,5 +303,4 @@ const Status_Content: React.FC<Props> = ({ setOpenDrawer }) => {
     </div>
   );
 };
-
 export default Status_Content;

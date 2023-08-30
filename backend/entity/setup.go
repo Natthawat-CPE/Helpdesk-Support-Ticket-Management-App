@@ -44,7 +44,7 @@ func SetupDatabase() {
 		
 		
 		//Data mockup for test system servic
-		mockupData(4)
+		mockupData(2)
 	}
 	db = database
 
@@ -57,7 +57,7 @@ func mockupData(i int) {
 			title := fmt.Sprintf("Ticket (%d)",num)
 			db.Create(&Ticket{
 			Title: title,
-			Description: "Des: abcdefg",
+			Description: "This is my Problems",
 			User_name: "Natthawat",
 			Phone: "0643284596",
 			Create_time: time.Now(),

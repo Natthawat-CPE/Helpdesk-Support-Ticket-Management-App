@@ -1,30 +1,21 @@
 import React, { useState } from "react";
-import {
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
-} from "@ant-design/icons";
-
+import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import CreateIcon from "@mui/icons-material/Create";
-import DashboardIcon from "@mui/icons-material/Dashboard";
 import TableRowsIcon from "@mui/icons-material/TableRows";
 import TableChartIcon from "@mui/icons-material/TableChart";
-import {Layout, Menu, Button, theme } from "antd";
-
+import { Layout, Menu, Button, theme } from "antd";
 import "./Tickets.css";
-
 import Status_Content from "./Status_Content";
 import Create_Content from "./Create_Content";
 import Table_Content from "./Table_Content";
 import Edit_ContentDrawer from "./Edit_ContentDrawer";
 
-
-
-
 const { Header, Sider, Content } = Layout;
 
 const Tickets: React.FC = () => {
-  const [dataDrawerFromStatus_Content, setDataDrawerFromStatus_Content] = useState('');
-  const [TicketID,setTicKetID] = useState(1);
+  const [dataDrawerFromStatus_Content, setDataDrawerFromStatus_Content] =
+    useState("");
+  const [TicketID, setTicKetID] = useState(1);
   const [statusPage, setStatusPage] = useState("1");
   const StatusDrawer = dataDrawerFromStatus_Content !== "";
 
@@ -44,7 +35,7 @@ const Tickets: React.FC = () => {
   } = theme.useToken();
 
   return (
-    <Layout >
+    <Layout>
       <Sider trigger={null} collapsible collapsed={collapsed}>
         <div className="demo-logo-vertical" />
         <Menu
@@ -72,42 +63,52 @@ const Tickets: React.FC = () => {
         />
       </Sider>
       <Layout>
-        <Content
-          id="content"
-        >
-
+        <Content id="content">
           <Header
-          style={{
-            padding: 0,
-            background: colorBgContainer,
-            fontWeight: 700,
-            fontSize: "20px",
-            borderBottom: '1px solid #ccc',
-          }}
-        >
-          <Button
-            type="text"
-            icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-            onClick={() => setCollapsed(!collapsed)}
             style={{
-              fontSize: "16px",
-              width: 64,
-              height: 64,
+              padding: 0,
+              background: colorBgContainer,
+              fontWeight: 700,
+              fontSize: "20px",
+              borderBottom: "1px solid #ccc",
             }}
-          />
-          Helpdesk Support Ticket Management
-        </Header>
+          >
+            <Button
+              type="text"
+              icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+              onClick={() => setCollapsed(!collapsed)}
+              style={{
+                fontSize: "16px",
+                width: 64,
+                height: 64,
+              }}
+            />
+            Helpdesk Support Ticket Management
+          </Header>
           <div>
             {statusPage === "1" ? (
               <div>
-                <Status_Content setOpenDrawer={setDataDrawerFromStatus_Content} />
-                <Edit_ContentDrawer setDrawer={StatusDrawer} handleclick={setDataDrawerFromStatus_Content} TicketID={TicketID}/>
-
+                <Status_Content
+                  setOpenDrawer={setDataDrawerFromStatus_Content}
+                  setTicKetID={setTicKetID}
+                />
+                <Edit_ContentDrawer
+                  setDrawer={StatusDrawer}
+                  handleclick={setDataDrawerFromStatus_Content}
+                  TicketID={TicketID}
+                />
               </div>
             ) : statusPage === "2" ? (
               <div>
-              <Table_Content setOpenDrawer={setDataDrawerFromStatus_Content} setTicKetID={setTicKetID} />
-              <Edit_ContentDrawer setDrawer={StatusDrawer} handleclick={setDataDrawerFromStatus_Content} TicketID={TicketID}/>
+                <Table_Content
+                  setOpenDrawer={setDataDrawerFromStatus_Content}
+                  setTicKetID={setTicKetID}
+                />
+                <Edit_ContentDrawer
+                  setDrawer={StatusDrawer}
+                  handleclick={setDataDrawerFromStatus_Content}
+                  TicketID={TicketID}
+                />
               </div>
             ) : (
               <Create_Content />
@@ -118,5 +119,4 @@ const Tickets: React.FC = () => {
     </Layout>
   );
 };
-
 export default Tickets;

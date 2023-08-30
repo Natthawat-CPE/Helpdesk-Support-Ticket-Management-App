@@ -1,4 +1,3 @@
-import React from "react";
 import { Button, Form, Input } from "antd";
 import {Create_Ticket} from "../services/TicketService"
 import {CreateTicket} from "../interfaces/Ticketinterface"

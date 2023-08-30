@@ -28,16 +28,9 @@ func main() {
 
 	// POST Ticket
 	r.POST("/CreateTicket",controller.CreateTicket)
-
-
 	r.Run()
 
-
-
 }
-
-
-
 func CORSMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")

@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { Form, Input, Drawer, theme, Button, Tag } from "antd";
+import React, { useEffect } from "react";
+import { Form, Input, Drawer } from "antd";
 import { Ticket } from "../interfaces/Ticketinterface";
 import { GetTicket, UpDateStatusTicket } from "../services/TicketService";
 import Button2 from "@mui/material/Button";
-import { IndexKind } from "typescript";
 
 interface Props {
   setDrawer: boolean;

@@ -1,8 +1,6 @@
-import React from "react";
 import {
   CreateTicket,
   UpdateTicket,
-  Ticket,
 } from "../interfaces/Ticketinterface";
 
 const apiUrl = "http://localhost:8080";
@@ -154,8 +152,7 @@ const UpDateTicket = async (data: UpdateTicket, TicketID: number) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
   };
-  let res = await fetch(`${apiUrl}/UpdateTicket/${TicketID}`, requestOptions);
-  fetch(apiUrl, requestOptions)
+  await fetch(`${apiUrl}/UpdateTicket/${TicketID}`, requestOptions)
     .then((response) => response.json())
     .then((res) => {
       if (res.data) {
@@ -176,11 +173,7 @@ const UpDateStatusTicket = async (
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(StatusUpdate),
   };
-  let res = await fetch(
-    `${apiUrl}/UpdateStatusTicket/${TicketID}`,
-    requestOptions
-  );
-  fetch(apiUrl, requestOptions)
+  await fetch(`${apiUrl}/UpdateStatusTicket/${TicketID}`,requestOptions)
     .then((response) => response.json())
     .then((res) => {
       if (res.data) {
